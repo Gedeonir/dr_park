@@ -4,11 +4,23 @@ import {
    StyleSheet,
    Text,
    View,
-   Alert  
+   Alert,
+   TouchableOpacity,  
  } from 'react-native';
+ import { Styles } from '../utils/Styles';
+ import BottomBar from '../components/BottomBar/BottomBar';
+
 
 const SignUp = ({ navigation, route }) => {
-   return <Text>This is {route.params.name}'s profile</Text>;
+   return( 
+      <View style={Styles.container}>
+         <Text>This is profile</Text>
+         <TouchableOpacity style={Styles.exploreBtn} title='Explore' onPress={()=> navigation.navigate('parkingDetails')}>
+            <Text style={Styles.exploreText}>Explore</Text>
+         </TouchableOpacity>
+         <BottomBar/>
+      </View>
+   )
    
 }
 export default SignUp

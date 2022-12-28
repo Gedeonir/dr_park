@@ -15,7 +15,7 @@ export const BottomBarStyles = StyleSheet.create({
         paddingLeft:"auto",
     },
     icon:{
-        color:"#3E4347",
+        color:"#979A9A",
         textAlign:"center",
     }
 
