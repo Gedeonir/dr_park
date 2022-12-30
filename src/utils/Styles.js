@@ -8,7 +8,8 @@ export const Styles = StyleSheet.create({
         minHeight: '100%',
         margin:0,
         padding:0,
-        lineHeight:5      
+        lineHeight:5,
+        backgroundColor:'rgba(193,243,254,0.2)'     
     },
     topBar:{
         paddingTop:45,
@@ -61,6 +62,7 @@ export const Styles = StyleSheet.create({
         borderTopLeftRadius:10,
         borderColor:"#13728F",
         padding:12,
+        marginBottom:50
     },
     parkingNearTitle:{
         fontSize:24,
@@ -139,9 +141,65 @@ export const Styles = StyleSheet.create({
     parkingTopLocation:{
         display:'flex',
         flexDirection:'row',
-    }
+    },
 
     /*---------------------------------Parking------------------------------------ */
-    
+    slotsHeader:{
+        padding:12,
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    slotBody:{
+        padding:12,
+        display:'flex',
+        flexDirection:'row',
+        alignItems:'center',
+        flexWrap: 'wrap',
+        flex:2,
+        marginTop:22
+    },
+    freeSlot:{
+        width:"50%",
+        height:60,
+        borderColor:'#13728F',
+    },
+    leftSlot:{
+        borderLeftWidth:0,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderRightWidth: 1,
+    },
+    rightSlot:{
+        borderLeftWidth:1,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderRightWidth: 0,
+    },
+
+    /*---------------------------------User account------------------------------------ */
+    userAccount:{
+        backgroundColor:'rgba(193,243,254,0.8)',
+        height:'100%',
+        borderTopRightRadius:10,
+        borderTopLeftRadius:10,
+        padding:12
+    },
+    inputGroup:{
+        width:'100%',
+        marginTop:10
+    },
+    label:{
+        fontSize:20,
+        marginBottom:6,
+        color:"#13728F",
+        fontWeight:'bold'
+    },
+    input:{
+        borderWidth:2,
+        padding:6,
+        borderRadius:10,
+        borderColor:'#13728F'
+    }
 
 })

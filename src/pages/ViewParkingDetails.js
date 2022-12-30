@@ -20,7 +20,7 @@ const ViewParkingDetails= ({ navigation, route }) => {
         <View style={Styles.container}>
             <View style={{backgroundColor:"#13728F",paddingStart:10,paddingEnd:10}}>
                 <View style={Styles.topBar}>
-                    <Ionicons name="arrow-back-outline" size={26} style={{paddingTop:5}} color="#CCF5FE"/>
+                    <Ionicons name="arrow-back-outline" size={26} style={{paddingTop:5}} color="#CCF5FE" onPress={()=> navigation.goBack()}/>
                     <Image style={Styles.logo} source={require('../../assets/images/profile.jpeg')}/>
                     <View style={Styles.parkingTop}>
                         <Text style={{fontSize:18,color:"#CCF5FE",fontWeight:'bold'}}>Parking Name</Text>
@@ -54,8 +54,8 @@ const ViewParkingDetails= ({ navigation, route }) => {
                 <View>
                     <Text style={Styles.slotTitle}>Slots Available</Text>
                     <Text style={Styles.slotNumber}>12</Text>
-                    <TouchableOpacity style={Styles.exploreBtn} title='Explore' onPress={()=> navigation.navigate('signUp',{name:'Jane'})}>
-                        <Text style={Styles.exploreText}>Book slot</Text>
+                    <TouchableOpacity style={Styles.exploreBtn} title='Explore' onPress={()=> navigation.navigate('parkingSlots')}>
+                        <Text style={Styles.exploreText}>View slots</Text>
                     </TouchableOpacity>
                 </View>
                 </View>

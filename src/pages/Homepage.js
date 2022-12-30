@@ -25,7 +25,7 @@ const Home = ({ navigation}) => {
             <View style={Styles.topBar}>
                <Image style={Styles.logo} source={require('../../assets/images/logo.png')}/>
                <View style={Styles.topBarBtn1}>
-                  <TouchableOpacity style={Styles.signIn} title='Sign in' onPress={()=> navigation.navigate('signUp')}>
+                  <TouchableOpacity style={Styles.signIn} title='Sign in' onPress={()=> navigation.navigate('signIn')}>
                      <Text style={Styles.signInText}>Sign in</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={Styles.signIn} title='Notification' onPress={()=> navigation.navigate('signUp')}>
@@ -73,7 +73,7 @@ const Home = ({ navigation}) => {
                         <View>
                            <Text style={Styles.slotTitle}>Slots Available</Text>
                            <Text style={Styles.slotNumber}>12</Text>
-                           <TouchableOpacity style={Styles.exploreBtn} title='Explore' onPress={()=> navigation.navigate('signUp',{name:'Jane'})}>
+                           <TouchableOpacity style={Styles.exploreBtn} title='Explore' onPress={()=> navigation.navigate('parkingDetails')}>
                               <Text style={Styles.exploreText}>Explore</Text>
                            </TouchableOpacity>
                         </View>

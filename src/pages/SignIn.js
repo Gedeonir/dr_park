@@ -15,7 +15,7 @@ import {
  import { Ionicons,Entypo,Octicons,EvilIcons,FontAwesome5,AntDesign} from '@expo/vector-icons';
 
 
-const SignUp = ({ navigation, route }) => {
+const SignIn = ({ navigation, route }) => {
    return( 
       <View style={Styles.container}>
             <ImageBackground style={{width:'100%',height:'100%',paddingTop:34}} resizeMode="cover" source={require('../../assets/images/accounts-bg.jpg')}>
@@ -25,27 +25,13 @@ const SignUp = ({ navigation, route }) => {
                      <TouchableOpacity style={{marginRight:6}}>
                         <Ionicons name="arrow-back-outline" size={26} style={{paddingTop:5}} color="#13728F" onPress={()=> navigation.goBack()}/>
                      </TouchableOpacity>
-                     <Text style={Styles.parkingNearTitle}>Create new account</Text>
+                     <Text style={Styles.parkingNearTitle}>Log into your account</Text>
                   </View>
                   <View style={Styles.inputGroup}>
                      <Text style={Styles.label}>Email</Text>
                      <TextInput
                         style={Styles.input}
                         placeholder="Enter your email"
-                     />
-                  </View>
-                  <View style={Styles.inputGroup}>
-                     <Text style={Styles.label}>FirstName</Text>
-                     <TextInput
-                        style={Styles.input}
-                        placeholder="Enter your firstName"
-                     />
-                  </View>
-                  <View style={Styles.inputGroup}>
-                     <Text style={Styles.label}>LastName</Text>
-                     <TextInput
-                        style={Styles.input}
-                        placeholder="Enter your LastName"
                      />
                   </View>
                   <View style={Styles.inputGroup}>
@@ -59,15 +45,18 @@ const SignUp = ({ navigation, route }) => {
                         <Entypo name="eye-with-line" size={24} color="#13728F" />
                      </TouchableOpacity>
                   </View>
+                  <TouchableOpacity title='Notification'>
+                     <Text>Forgot password?</Text>
+                  </TouchableOpacity>
                   <View style={Styles.inputGroup}>
                      <TouchableOpacity style={{backgroundColor:'#13728F',height:40,borderRadius:10}}>
-                        <Text style={{textAlign:'center',fontSize:20,color:'white',padding:6}}>Register</Text>
+                        <Text style={{textAlign:'center',fontSize:20,color:'white',padding:6}}>Login</Text>
                      </TouchableOpacity>
                   </View>
 
                   <View style={Styles.inputGroup}>
-                     <TouchableOpacity>
-                        <Text style={{textAlign:'center',fontSize:18,color:'#13728F',padding:6}}>Already user?Login</Text>
+                     <TouchableOpacity onPress={()=> navigation.navigate('signUp')}>
+                        <Text style={{textAlign:'center',fontSize:18,color:'#13728F',padding:6}}>New user?Register</Text>
                      </TouchableOpacity>
                   </View>
                </View>
@@ -77,4 +66,4 @@ const SignUp = ({ navigation, route }) => {
    )
    
 }
-export default SignUp
+export default SignIn
