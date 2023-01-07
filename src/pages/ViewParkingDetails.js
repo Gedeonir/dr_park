@@ -13,52 +13,76 @@ import {
  import { Styles } from '../utils/Styles';
  import BottomBar from '../components/BottomBar/BottomBar';
  import MapView from 'react-native-maps'
- import { Ionicons,Entypo,Octicons,EvilIcons,FontAwesome5,AntDesign} from '@expo/vector-icons';
+ import { Ionicons,Entypo,Octicons,EvilIcons,FontAwesome5,AntDesign,MaterialIcons,Feather} from '@expo/vector-icons';
+ import { useDispatch,useSelector } from 'react-redux';
+ import { getOneParking } from '../redux/actions/fetchAllParkingsAction';
 
 const ViewParkingDetails= ({ navigation, route }) => {
+    const {ID} = route.params;
+    const dispatch = useDispatch();
+    const parkingData = useSelector(
+        (state) => state.getOneParkingReducer?.oneParking
+    );
+    
+    React.useEffect(() => {
+    async function handleGetParking() {
+        await dispatch(getOneParking(ID));
+    };
+
+    handleGetParking()
+    },[parkingData]);
+
+    console.log(parkingData)
     return(
         <View style={Styles.container}>
-            <View style={{backgroundColor:"#13728F",paddingStart:10,paddingEnd:10}}>
+            <View style={{backgroundColor:"#13728F",paddingStart:2,paddingEnd:2}}>
                 <View style={Styles.topBar}>
-                    <Ionicons name="arrow-back-outline" size={26} style={{paddingTop:5}} color="#CCF5FE" onPress={()=> navigation.goBack()}/>
-                    <Image style={Styles.logo} source={require('../../assets/images/profile.jpeg')}/>
-                    <View style={Styles.parkingTop}>
-                        <Text style={{fontSize:18,color:"#CCF5FE",fontWeight:'bold'}}>Parking Name</Text>
-                        <View style={Styles.parkingTopLocation}>
-                            <Text style={{color:"#CCF5FE"}}>Location</Text>
+                    <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between',width:'70%'}}>
+                        <Ionicons name="arrow-back-outline" size={26} style={{paddingTop:5}} color="#CCF5FE" onPress={()=> navigation.goBack()}/>
+                        <Image style={Styles.profilePhoto} source={require('../../assets/images/profile.jpeg')}/>
+                        <View style={Styles.parkingTop}>
+                            <Text style={{fontSize:18,color:"#CCF5FE",fontWeight:'bold'}}>{parkingData?.oneParking.parkingName}</Text>
+                            <View style={Styles.parkingTopLocation}>
+                                <Text style={{color:"#CCF5FE"}}>{parkingData?.oneParking.location}</Text>
+                            </View>
                         </View>
+                    </View>
+                    <View style={{display:'flex',flexDirection:'row',justifyContent:'space-around',width:'20%'}}>
+                        <AntDesign name="edit" size={20} style={{paddingTop:5}} color="#CCF5FE" />
+                        <MaterialIcons name="delete" size={20} style={{paddingTop:5}} color="#5c0512"  />
                     </View>
                 </View>
             </View>
             <MapView style={{flex: 1}} region={{latitude: 42.882004,longitude: 74.582748,latitudeDelta: 0.0922,longitudeDelta: 0.0421}} showsUserLocation={true}/>
-            <View style={[Styles.card,{position: 'absolute',left:50,bottom:100,backgroundColor:'white'}]}>
-                <View style={Styles.cardHeader}>
-                <Text style={Styles.cardHeaderText}>Parking name</Text>
-                <AntDesign name="staro" size={20} style={Styles.star} />
-                </View>
+            <View style={[Styles.card,{position: 'absolute',height:200,left:50,bottom:100,backgroundColor:'white'}]}>
                 <View style={Styles.cardBody}>
-                <View>
-                    <View style={Styles.cardElement}>
-                        <EvilIcons name="location" size={20} style={Styles.cardIcons} />
-                        <Text>Parking location</Text>
+                    <View>
+                        <View style={Styles.cardElement}>
+                            <EvilIcons name="location" size={20} style={Styles.cardIcons} />
+                            <View>
+                                <Text>{parkingData?.oneParking.province}</Text>
+                                <Text>{parkingData?.oneParking.district}</Text>
+                                <Text>{parkingData?.oneParking.sector}</Text>
+                                <Text>{parkingData?.oneParking.location}</Text>
+                            </View>
+                        </View>
+                        <View style={Styles.cardElement}>
+                            <Ionicons name="md-car-sport-outline" size={20} style={Styles.cardIcons}/>
+                            <Text>Parking capacity</Text>
+                        </View>
+                        <View style={Styles.cardElement}>
+                            <Ionicons name="cash-outline" size={20} style={Styles.cardIcons} />
+                            <Text>{parkingData.oneParking.prices}Rwf/h</Text>
+                        </View>
                     </View>
-                    <View style={Styles.cardElement}>
-                        <Ionicons name="md-car-sport-outline" size={20} style={Styles.cardIcons}/>
-                        <Text>Parking capacity</Text>
-                    </View>
-                    <View style={Styles.cardElement}>
-                        <Ionicons name="cash-outline" size={20} style={Styles.cardIcons} />
-                        <Text>Parking prices</Text>
+                    <View>
+                        <Text style={[Styles.slotTitle,{fontSize:20}]}>Slots Available</Text>
+                        <Text style={[Styles.slotNumber,{fontSize:30}]}>12</Text>
                     </View>
                 </View>
-                <View>
-                    <Text style={Styles.slotTitle}>Slots Available</Text>
-                    <Text style={Styles.slotNumber}>12</Text>
-                    <TouchableOpacity style={Styles.exploreBtn} title='Explore' onPress={()=> navigation.navigate('parkingSlots')}>
-                        <Text style={Styles.exploreText}>View slots</Text>
-                    </TouchableOpacity>
-                </View>
-                </View>
+                <TouchableOpacity style={Styles.exploreBtn} title='Explore' onPress={()=> navigation.navigate('parkingSlots',{parkingID:parkingData._id})}>
+                    <Text style={Styles.exploreText}>View slots</Text>
+                </TouchableOpacity>
             </View>
             <BottomBar/>
         </View>

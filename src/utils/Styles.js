@@ -16,12 +16,11 @@ export const Styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-between',
-        paddingBottom:10
+        paddingBottom:10,
     },
     logo:{
-        height:40,
-        width:40,
-        borderRadius:50
+        height:50,
+        width:50,
     },
     topBarBtn1:{
         paddingTop:5,
@@ -41,8 +40,8 @@ export const Styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         borderRadius:10,
-        width:270,
-        marginRight:10
+        width:'80%',
+        marginRight:5
     },
     dot:{
         top:-30,
@@ -51,10 +50,11 @@ export const Styles = StyleSheet.create({
     searchBox:{
         display:'flex',
         flexDirection:'row',
+        justifyContent:'space-between'
     },
     parkingNear:{
         backgroundColor:"white",
-        height:200,
+        height:300,
         borderTopWidth: 1,
         borderLeftWidth: 1,
         borderRightWidth: 1,
@@ -62,13 +62,15 @@ export const Styles = StyleSheet.create({
         borderTopLeftRadius:10,
         borderColor:"#13728F",
         padding:12,
-        marginBottom:50
+        position: 'absolute', 
+        bottom: 0,
+        width:'100%'
     },
     parkingNearTitle:{
         fontSize:24,
         fontWeight:'bold',
-        color:"#13728F"
-
+        color:"#13728F",
+        marginBottom:5
     },
     cardsView:{
         display:"flex",
@@ -77,8 +79,8 @@ export const Styles = StyleSheet.create({
     },
     card:{
         borderWidth:1,
-        width:250,
-        height:120,
+        width:300,
+        height:170,
         borderColor:"#13728F",
         borderRadius:10,
         padding:5,
@@ -103,12 +105,14 @@ export const Styles = StyleSheet.create({
     cardBody:{
         display:'flex',
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        padding:10
     },
     cardElement:{
         display:'flex',
         flexDirection:'row',
-        fontSize:13
+        fontSize:13,
+        marginBottom:2
     },
     cardIcons:{
         color:"#979A9A",
@@ -128,19 +132,32 @@ export const Styles = StyleSheet.create({
     exploreBtn:{
         backgroundColor:'#13728F',
         borderRadius:5,
-        padding:5
+        padding:5,
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        width:'70%',
+        marginLeft:'auto',
+        marginRight:'auto'
+
     },
     exploreText:{
         textAlign:'center',
         color:"#CCF5FE",
+        marginLeft:10
     },
     parkingTop:{
-        paddingStart:5,
-        width:300
+        width:"70%",
+        marginLeft:3
     },
     parkingTopLocation:{
         display:'flex',
         flexDirection:'row',
+    },
+    profilePhoto:{
+        width:50,
+        height:50,
+        borderRadius:50
     },
 
     /*---------------------------------Parking------------------------------------ */
@@ -165,10 +182,10 @@ export const Styles = StyleSheet.create({
         borderColor:'#13728F',
     },
     leftSlot:{
-        borderLeftWidth:0,
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-        borderRightWidth: 1,
+        borderWidth:1,
+        // borderTopWidth: 1,
+        // borderBottomWidth: 1,
+        // borderRightWidth: 1,
     },
     rightSlot:{
         borderLeftWidth:1,

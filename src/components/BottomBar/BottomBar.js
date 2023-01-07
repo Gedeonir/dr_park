@@ -17,11 +17,11 @@ const BottomBar = ({ navigation})=>{
             </TouchableOpacity>
             <TouchableOpacity style={BottomBarStyles.icons}>
                 <AntDesign name="book" size={20} style={BottomBarStyles.icon} />               
-                <Text style={BottomBarStyles.icon}>Parkings</Text>
+                <Text style={BottomBarStyles.icon}>My Bookings</Text>
             </TouchableOpacity>
             <TouchableOpacity style={BottomBarStyles.icons}>
                 <Ionicons name="settings-outline" size={20} style={BottomBarStyles.icon} />               
-                <Text style={BottomBarStyles.icon}>settings</Text>
+                <Text style={BottomBarStyles.icon}>Settings</Text>
             </TouchableOpacity>
         </View>
     )
