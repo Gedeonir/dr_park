@@ -136,9 +136,10 @@ export const Styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         justifyContent:'center',
-        width:'70%',
+        width:'100%',
         marginLeft:'auto',
-        marginRight:'auto'
+        marginRight:'auto',
+        height:30
 
     },
     exploreText:{
@@ -174,12 +175,17 @@ export const Styles = StyleSheet.create({
         alignItems:'center',
         flexWrap: 'wrap',
         flex:2,
-        marginTop:22
+        marginTop:22,
+        width:'100%'
     },
     freeSlot:{
-        width:"50%",
-        height:60,
+        width:"40%",
+        height:75,
         borderColor:'#13728F',
+        borderWidth:1,
+        padding:2,
+        marginBottom:2,
+        marginLeft:2
     },
     leftSlot:{
         borderWidth:1,
