@@ -10,6 +10,9 @@ import SignIn from './src/pages/SignIn';
 import SignUp from './src/pages/SignUp';
 import ViewParkingDetails from './src/pages/ViewParkingDetails';
 import ParkingSlots from './src/pages/ParkingSlots';
+import ParkingLists from './src/pages/ParkingLists';
+import Search from './src/pages/searchParkings';
+import Booking from './src/pages/Booking';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +29,9 @@ export default function App() {
           <Stack.Screen name="signUp" component={SignUp} />
           <Stack.Screen name="parkingDetails" component={ViewParkingDetails}/>
           <Stack.Screen name="parkingSlots" component={ParkingSlots}/>
+          <Stack.Screen name="parkingsList" component={ParkingLists}/>
+          <Stack.Screen name="search" component={Search}/>
+          <Stack.Screen name="bookParking" component={Booking}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

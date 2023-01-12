@@ -16,7 +16,6 @@ export const Styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-between',
-        paddingBottom:10,
     },
     logo:{
         height:50,
@@ -38,7 +37,7 @@ export const Styles = StyleSheet.create({
         backgroundColor:"white",
         height: 50,
         borderWidth: 1,
-        padding: 10,
+        paddingLeft: 40,
         borderRadius:10,
         width:'80%',
         marginRight:5
@@ -50,7 +49,8 @@ export const Styles = StyleSheet.create({
     searchBox:{
         display:'flex',
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        paddingTop:40
     },
     parkingNear:{
         backgroundColor:"white",
@@ -66,6 +66,11 @@ export const Styles = StyleSheet.create({
         bottom: 0,
         width:'100%'
     },
+    parkingList:{
+        borderColor:"#13728F",
+        padding:12,
+        width:'100%'
+    },
     parkingNearTitle:{
         fontSize:24,
         fontWeight:'bold',
@@ -77,6 +82,11 @@ export const Styles = StyleSheet.create({
         padding:5,
         flexDirection:"row"
     },
+    cardsViewSearch:{
+        padding:5,
+        justifyContent:'center',
+        alignItems:'center'
+    },
     card:{
         borderWidth:1,
         width:300,
@@ -85,7 +95,7 @@ export const Styles = StyleSheet.create({
         borderRadius:10,
         padding:5,
         marginRight:15,
-
+        marginBottom:5
     },
     cardHeader:{
         display:"flex",
@@ -139,13 +149,12 @@ export const Styles = StyleSheet.create({
         width:'100%',
         marginLeft:'auto',
         marginRight:'auto',
-        height:30
+        height:35
 
     },
     exploreText:{
         textAlign:'center',
         color:"#CCF5FE",
-        marginLeft:10
     },
     parkingTop:{
         width:"70%",
@@ -210,19 +219,30 @@ export const Styles = StyleSheet.create({
     },
     inputGroup:{
         width:'100%',
-        marginTop:10
+        marginTop:5
     },
     label:{
-        fontSize:20,
+        fontSize:16,
         marginBottom:6,
         color:"#13728F",
         fontWeight:'bold'
     },
     input:{
         borderWidth:2,
-        padding:6,
+        padding:2,
         borderRadius:10,
-        borderColor:'#13728F'
-    }
+        borderColor:'#13728F',
+        width:'100%'
+    },
+    searchBy:{
+        borderWidth:2,
+        height:30,
+        borderRadius:5,
+        borderColor:'#13728F',
+        width:'100%'
+    },
+    dropdown1RowStyle: {backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'},
+    dropdown1RowTxtStyle: {color: '#444', textAlign: 'left'},
+
 
 })

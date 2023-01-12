@@ -54,3 +54,34 @@ export const getOneParkingSlots = (id)=>async(dispatch)=>{
         })
     }
 }
+
+const deleteParking = (id)=>async(dispatch)=>{
+    try {
+        const res = await axios.get(`${BACKEND_URL}/parkings/${id}`);
+        return dispatch({
+            type: actions.DELETE_PARKING_SUCCESS,
+            payload: res.data,
+        })
+
+    } catch (error) {
+        return dispatch({
+            type:actions.DELETE_PARKING_FAIL,
+            payload:error.message
+        })
+    }
+}
+
+export const searchParking =(bodyData)=>async(dispatch)=>{
+    try {
+        const res = await axios.post(`${BACKEND_URL}/parkings/findParkingBy/parking`,bodyData);
+        return dispatch({
+            type: actions.SEARCH_PARKING_SUCCESS,
+            payload: res.data,
+        })
+    } catch (error) {
+        return dispatch({
+            type: actions.SEARCH_PARKING_FAIL,
+            payload: error.message,
+        })
+    }
+}

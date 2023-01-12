@@ -20,6 +20,8 @@ import {
  import BottomBar from '../components/BottomBar/BottomBar';
  import { Ionicons,Entypo,Octicons,EvilIcons,FontAwesome5,AntDesign,MaterialIcons} from '@expo/vector-icons';
  import { getAllParkings } from '../redux/actions/fetchAllParkingsAction';
+ import * as SecureStore from 'expo-secure-store';
+
 
 const Home = ({ navigation}) => {
    const [loading,setLoading]= React.useState(true)
@@ -32,9 +34,12 @@ const Home = ({ navigation}) => {
          await dispatch(getAllParkings());
       };
 
+      async function getValueFor() {
+         let result = await SecureStore.getItemAsync("token");
+       }
+       getValueFor()
       handleGetParkings()
    },[parkingData]);
-
 
    return (
       <View style={Styles.container}>
@@ -42,30 +47,33 @@ const Home = ({ navigation}) => {
             <View style={Styles.topBar}>
                <Image style={Styles.logo} source={require('../../assets/images/logo.png')}/>
                <View style={Styles.topBarBtn1}>
+                  <TouchableOpacity style={Styles.signIn} title='Notification' onPress={() => navigation.navigate('search')}>
+                     <AntDesign name="search1" size={20} color="#CCF5FE" />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={Styles.signIn} title='Notification' onPress={() => navigation.navigate('signUp')}>
+                     <Ionicons name="notifications" size={20} color="#CCF5FE" />
+                     <Entypo name="dot-single" size={24} color="#E4A77A" style={Styles.dot} />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={Styles.signIn} title='Profile' onPress={() => navigation.navigate('signUp')}>
+                     <Octicons name="person" size={20} color="#CCF5FE" />
+                  </TouchableOpacity>
+                  
                   <TouchableOpacity style={Styles.signIn} title='Sign in' onPress={()=> navigation.navigate('signIn')}>
                      <Text style={Styles.signInText}>Sign in</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={Styles.signIn} title='Notification' onPress={()=> navigation.navigate('signUp')}>
-                     <Ionicons name="notifications" size={20} color="#CCF5FE" />
-                     <Entypo name="dot-single" size={24} color="#E4A77A" style={Styles.dot}/>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={Styles.signIn} title='Profile' onPress={()=> navigation.navigate('signUp')}>
-                     <Octicons name="person" size={20} color="#CCF5FE" />
-                  </TouchableOpacity>
+
                </View>
             </View>
-            <SafeAreaView style={Styles.searchBox}>
-               <TextInput
-                  placeholder='Search any nearby parking'
-                  style={Styles.searchInput}
-                  />
-                  <Ionicons name="filter" size={44} color="#CCF5FE" />
-            </SafeAreaView>
          </View>
          <MapView style={{flex: 1}} region={{latitude: 42.882004,longitude: 74.582748,latitudeDelta: 0.0922,longitudeDelta: 0.0421}} showsUserLocation={true}/>
          <View style={Styles.parkingNear}>
             <View>
+               <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
                <Text style={Styles.parkingNearTitle}>Recent parkings</Text>
+               <TouchableOpacity style={Styles.signIn} title='Sign in' onPress={()=> navigation.navigate('parkingsList')}>
+                  <Text style={{color:'#13728F'}}>View all</Text>
+               </TouchableOpacity>
+               </View>
                {parkingData.loading?(
                   <View style={{padding:12}}>
                      <Image style={[Styles.profilePhoto,{marginLeft:'auto',marginRight:'auto',marginTop:20}]} source={require('../../assets/images/loading.gif')}/>
@@ -89,16 +97,16 @@ const Home = ({ navigation}) => {
                                     <View>
                                        <View style={Styles.cardElement}>
                                           <Ionicons name="md-car-sport-outline" size={20} style={Styles.cardIcons}/>
-                                          <Text>Parking capacity</Text>
+                                          <Text>Capacity:{parking.capacity}</Text>
                                        </View>
                                        <View style={Styles.cardElement}>
                                           <Ionicons name="cash-outline" size={20} style={Styles.cardIcons} />
-                                          <Text>Parking prices</Text>
+                                       <Text>{parking.prices} Rwf/h</Text>
                                        </View>
                                     </View>
                                     <View>
                                        <Text style={Styles.slotTitle}>Slots Available</Text>
-                                       <Text style={Styles.slotNumber}>12</Text>
+                                       <Text style={Styles.slotNumber}>{parking.slotAvailable}</Text>
                                     </View>
                                  </View>
                                  <TouchableOpacity style={Styles.exploreBtn} title='Explore' onPress={()=> navigation.navigate('parkingDetails',{ID:parking._id})}>

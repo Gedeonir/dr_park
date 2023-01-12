@@ -18,19 +18,21 @@ import {
  import { getOneParking } from '../redux/actions/fetchAllParkingsAction';
 
 const ViewParkingDetails= ({ navigation, route }) => {
-    const {ID} = route.params;
+
     const dispatch = useDispatch();
     const parkingData = useSelector(
         (state) => state.getOneParkingReducer?.oneParking
     );
     
-    React.useEffect(() => {
-    async function handleGetParking() {
-        await dispatch(getOneParking(ID));
-    };
 
-    handleGetParking()
-    },[parkingData]);
+    React.useEffect(() => {
+        const {ID} = route.params;
+        async function handleGetParking() {
+            await dispatch(getOneParking(ID));
+        };
+
+        handleGetParking()
+    },[]);
 
     return(
         <View style={Styles.container}>
@@ -75,7 +77,7 @@ const ViewParkingDetails= ({ navigation, route }) => {
                             </View>
                             <View style={Styles.cardElement}>
                                 <Ionicons name="md-car-sport-outline" size={20} style={Styles.cardIcons} />
-                                <Text>Parking capacity</Text>
+                                <Text>capacity:{parkingData.oneParking.capacity}</Text>
                             </View>
                             <View style={Styles.cardElement}>
                                 <Ionicons name="cash-outline" size={20} style={Styles.cardIcons} />
@@ -84,7 +86,7 @@ const ViewParkingDetails= ({ navigation, route }) => {
                         </View>
                         <View>
                             <Text style={[Styles.slotTitle, { fontSize: 20 }]}>Slots Available</Text>
-                            <Text style={[Styles.slotNumber, { fontSize: 30 }]}>12</Text>
+                            <Text style={[Styles.slotNumber, { fontSize: 30 }]}>{parkingData?.oneParking.slotAvailable}</Text>
                         </View>
                     </View>
                     <TouchableOpacity style={Styles.exploreBtn} title='Explore' onPress={() => navigation.navigate('parkingSlots', { parkingID: parkingData?.oneParking._id })}>
