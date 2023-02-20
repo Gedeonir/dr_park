@@ -5,7 +5,7 @@ import { Button, StyleSheet } from "react-native";
 export const Styles = StyleSheet.create({
     /*-------------------------------Homepage-------------------------------------*/
     container:{
-        minHeight: '100%',
+        height: '100%',
         margin:0,
         padding:0,
         lineHeight:5,
@@ -16,12 +16,10 @@ export const Styles = StyleSheet.create({
         display:'flex',
         flexDirection:'row',
         justifyContent:'space-between',
-        paddingBottom:10
     },
     logo:{
-        height:40,
-        width:40,
-        borderRadius:50
+        height:50,
+        width:50,
     },
     topBarBtn1:{
         paddingTop:5,
@@ -39,10 +37,10 @@ export const Styles = StyleSheet.create({
         backgroundColor:"white",
         height: 50,
         borderWidth: 1,
-        padding: 10,
+        paddingLeft: 40,
         borderRadius:10,
-        width:270,
-        marginRight:10
+        width:'80%',
+        marginRight:5
     },
     dot:{
         top:-30,
@@ -51,10 +49,12 @@ export const Styles = StyleSheet.create({
     searchBox:{
         display:'flex',
         flexDirection:'row',
+        justifyContent:'space-between',
+        paddingTop:40
     },
     parkingNear:{
         backgroundColor:"white",
-        height:200,
+        height:300,
         borderTopWidth: 1,
         borderLeftWidth: 1,
         borderRightWidth: 1,
@@ -62,28 +62,40 @@ export const Styles = StyleSheet.create({
         borderTopLeftRadius:10,
         borderColor:"#13728F",
         padding:12,
-        marginBottom:50
+        position: 'absolute', 
+        bottom: 0,
+        width:'100%'
+    },
+    parkingList:{
+        borderColor:"#13728F",
+        padding:12,
+        width:'100%'
     },
     parkingNearTitle:{
         fontSize:24,
         fontWeight:'bold',
-        color:"#13728F"
-
+        color:"#13728F",
+        marginBottom:5
     },
     cardsView:{
         display:"flex",
         padding:5,
         flexDirection:"row"
     },
+    cardsViewSearch:{
+        padding:5,
+        justifyContent:'center',
+        alignItems:'center'
+    },
     card:{
         borderWidth:1,
-        width:250,
-        height:120,
+        width:300,
+        height:170,
         borderColor:"#13728F",
         borderRadius:10,
         padding:5,
         marginRight:15,
-
+        marginBottom:5
     },
     cardHeader:{
         display:"flex",
@@ -103,12 +115,14 @@ export const Styles = StyleSheet.create({
     cardBody:{
         display:'flex',
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        padding:10
     },
     cardElement:{
         display:'flex',
         flexDirection:'row',
-        fontSize:13
+        fontSize:13,
+        marginBottom:2
     },
     cardIcons:{
         color:"#979A9A",
@@ -128,19 +142,32 @@ export const Styles = StyleSheet.create({
     exploreBtn:{
         backgroundColor:'#13728F',
         borderRadius:5,
-        padding:5
+        padding:5,
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'center',
+        width:'100%',
+        marginLeft:'auto',
+        marginRight:'auto',
+        height:35
+
     },
     exploreText:{
         textAlign:'center',
         color:"#CCF5FE",
     },
     parkingTop:{
-        paddingStart:5,
-        width:300
+        width:"70%",
+        marginLeft:3
     },
     parkingTopLocation:{
         display:'flex',
         flexDirection:'row',
+    },
+    profilePhoto:{
+        width:50,
+        height:50,
+        borderRadius:50
     },
 
     /*---------------------------------Parking------------------------------------ */
@@ -157,18 +184,23 @@ export const Styles = StyleSheet.create({
         alignItems:'center',
         flexWrap: 'wrap',
         flex:2,
-        marginTop:22
+        marginTop:22,
+        width:'100%'
     },
     freeSlot:{
-        width:"50%",
-        height:60,
+        width:"40%",
+        height:75,
         borderColor:'#13728F',
+        borderWidth:1,
+        padding:2,
+        marginBottom:2,
+        marginLeft:2
     },
     leftSlot:{
-        borderLeftWidth:0,
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-        borderRightWidth: 1,
+        borderWidth:1,
+        // borderTopWidth: 1,
+        // borderBottomWidth: 1,
+        // borderRightWidth: 1,
     },
     rightSlot:{
         borderLeftWidth:1,
@@ -187,19 +219,30 @@ export const Styles = StyleSheet.create({
     },
     inputGroup:{
         width:'100%',
-        marginTop:10
+        marginTop:5
     },
     label:{
-        fontSize:20,
+        fontSize:16,
         marginBottom:6,
         color:"#13728F",
         fontWeight:'bold'
     },
     input:{
-        borderWidth:2,
-        padding:6,
+        borderWidth:1,
+        padding:5,
         borderRadius:10,
-        borderColor:'#13728F'
-    }
+        borderColor:'#13728F',
+        width:'100%'
+    },
+    searchBy:{
+        borderWidth:2,
+        height:30,
+        borderRadius:5,
+        borderColor:'#13728F',
+        width:'100%'
+    },
+    dropdown1RowStyle: {backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5'},
+    dropdown1RowTxtStyle: {color: '#444', textAlign: 'left'},
+
 
 })

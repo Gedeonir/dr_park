@@ -3,6 +3,7 @@ import { Button, StyleSheet } from "react-native";
 export const BottomBarStyles = StyleSheet.create({
     bottomBar:{
         borderStartColor:"white",
+        justifyContent:'space-between',
         height:60,
         display:'flex',
         flexDirection:'row',
@@ -13,9 +14,8 @@ export const BottomBarStyles = StyleSheet.create({
         bottom: 0, 
     },
     icons:{
-        width:70,
+        width:'25%',
         height:80,
-        marginLeft:10,
         paddingLeft:"auto",
     },
     icon:{
