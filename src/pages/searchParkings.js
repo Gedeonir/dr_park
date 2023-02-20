@@ -147,9 +147,7 @@ const Search = ({ navigation}) => {
                ):(
                   searchData.success?(
                      <View horizontal={true} style={Styles.cardsViewSearch}>
-                        <View style={{padding:10,position:'absolute',top:'30%',right:0,left:0, display:`${searchData?.parkings?.parkings.length > 0?'none':'flex'}`}}>
-                            <Text style={{textAlign:'center',fontSize:20,padding:5,margin:12}}>No result</Text>
-                        </View>
+                        
                         {searchData?.parkings?.parkings.map((parking)=>{
                            return(
                               <View style={[Styles.card,{height:80}]} key={parking._id}>
@@ -169,11 +167,9 @@ const Search = ({ navigation}) => {
                      </View>
                   ):(
                      <View style={{padding:10}}>
-                        <MaterialIcons style={{textAlign:'center'}} name="error" size={60} color="#13728F" />
-                        <Text style={{textAlign:'center',fontSize:20,padding:5}}>{searchData.error}</Text>
-                        <TouchableOpacity style={Styles.exploreBtn} title='Explore' onPress={()=> navigation.navigate('parkingDetails',{ID:parking._id})}>
-                           <Text style={Styles.exploreText}>Reload</Text>
-                        </TouchableOpacity>
+                        <View style={{padding:10,position:'absolute',top:'30%',right:0,left:0}}>
+                            <Text style={{textAlign:'center',fontSize:20,padding:5,margin:12}}>No result</Text>
+                        </View>
                      </View>
                   )
                   )}

@@ -17,64 +17,63 @@ import { Styles } from '../utils/Styles';
 import BottomBar from '../components/BottomBar/BottomBar';
 import MapView from 'react-native-maps'
 import { Ionicons,Entypo,Octicons,EvilIcons,FontAwesome5,AntDesign,MaterialIcons} from '@expo/vector-icons';
-import { getAllParkings } from '../redux/actions/fetchAllParkingsAction';
+import { getOneParking } from '../redux/actions/fetchAllParkingsAction';
 import { useDispatch,useSelector } from 'react-redux';
 import { locations } from '../utils/locations';
 import SelectDropdown from 'react-native-select-dropdown'
+import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from 'react-native-modern-datepicker';
 
 
 const Booking= ({ navigation, route }) => {
-    const dispatch = useDispatch();
-    const [provinces, setProvinces] = useState([]);
-    const [districts, setDistricts] = useState([]);
-    const [sectors, setSectors] = useState([]);
 
-    const getProvinces = () => {
-        provinces.length = 0;
-        Object.keys(locations).forEach((province) => {
-          provinces.push(province);
-        });
-    };
-    
-    const getDistricts = (provinceName) => {
-        try {
-            const data = locations[provinceName];
-            districts.length = 0;
-            Object.keys(data).forEach((district) => {
-            districts.push(district);
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const [datePicker, setDatePicker] = useState(false);
 
-    const getSectors = (provinceName, districtName) => {
-        try {
-            const data = locations[provinceName][districtName];
-            sectors.length = 0;
-            Object.keys(data).forEach((sector) => {
-            sectors.push(sector);
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    };
+  const [date, setDate] = useState(new Date());
 
-    const parkingData = useSelector(
-        (state) => state.getOneParkingReducer?.oneParking
-    );
+  const [timePicker, setTimePicker] = useState(false);
+
+  const [checkInTime, setTime] = useState(new Date(Date.now()));
+  
+
+ const showDatePicker = ()=> {
+    setDatePicker(true);
+  };
+
+  const showTimePicker = () => {
+    setTimePicker(true);
+  };
+
+  const onDateSelected = (event, value) => {
+    setDate(value);
+    setDatePicker(false);
+    //navigation.navigate("AfternoonRemote", {opt_date: value.toISOString().slice(0,10)});
+  };
+
+  const onCheckInTimeSelected = (event, value) => {
+    setTime(value);
+    setTimePicker(false);
+    let time = checkInTime.getTime()
+    console.log(time.toISOString().slice(0,10))
+  };
+
+    // const parkingData = useSelector(
+    //     (state) => state.getOneParkingReducer?.oneParking
+    // );
     
 
-    React.useEffect(() => {
-        const {ID} = route.params;
-        async function handleGetParking() {
-            await dispatch(getOneParking(ID));
-        };
+    // React.useEffect(() => {
+    //     const {ID} = route.params;
+    //     async function handleGetParking() {
+    //         await dispatch(getOneParking(ID));
+    //     };
 
-        handleGetParking()
-    },[]);
+    //     handleGetParking()
+    // },[]);
 
     const [modalVisible, setModalVisible] = React.useState(false);
+    const [isDisplayDate, setShow] = useState(false);
+    const [displaymode, setMode] = useState('date');
 
     const [open, setOpen] = React.useState(false);
     const [formData,setFormData] = React.useState({
@@ -111,18 +110,18 @@ const Booking= ({ navigation, route }) => {
     }
 
     return(
-        <View style={Styles.container}>
+        <SafeAreaView style={Styles.container}>
             <View style={{ backgroundColor: "#13728F", paddingStart: 10, paddingEnd: 10 }}>
                 <View style={Styles.topBar}>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '70%' }}>
                         <Ionicons name="arrow-back-outline" size={26} style={{ paddingTop: 5 }} color="#CCF5FE" onPress={() => navigation.goBack()} />
                         <Image style={Styles.profilePhoto} source={require('../../assets/images/profile.jpeg')} />
-                        <View style={Styles.parkingTop}>
+                        {/* <View style={Styles.parkingTop}>
                             <Text style={{ fontSize: 18, color: "#CCF5FE", fontWeight: 'bold' }}>{parkingData?.oneParking.parkingName}</Text>
                             <View style={Styles.parkingTopLocation}>
                                 <Text style={{ color: "#CCF5FE" }}>{parkingData?.oneParking.location}</Text>
                             </View>
-                        </View>
+                        </View> */}
                     </View>
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '20%' }}>
                         <AntDesign name="edit" size={20} style={{ paddingTop: 5 }} color="#CCF5FE" />
@@ -132,78 +131,130 @@ const Booking= ({ navigation, route }) => {
             </View>
             <View style={styles.centeredView}>
                 <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between',width:'100%'}}>
-                    <Text style={Styles.parkingNearTitle}>Booking form</Text>
-                </View>  
-                <View style={Styles.inputGroup}>
-                    <Text style={Styles.label}>Slot Code/Name</Text>
-                    <TextInput
-                        style={Styles.input}
-                        defaultValue={formData.slotCode}
-                        placeholder="Enter slot code/name"
-                        name="slotCode"
-                        onChangeText={(value)=>{
-                            setFormData({
-                            ...formData,
-                            slotCode:value
-                            })
-                        }
-                        }
-                    />
+                    <Text style={Styles.parkingNearTitle}>Book a parking today</Text>
                 </View>
-                <View style={Styles.inputGroup}>
-                    <Text style={Styles.label}>Slot size</Text>
-                    <TextInput
-                        name='slotSize'
-                        defaultValue={formData.slotSize}
-                        style={Styles.input}
-                        placeholder="Enter size of slot"
-                        onChangeText={(sizeValue)=>
-                            setFormData({
+
+                <Text style={[Styles.label,{width:'100%'}]}>Date</Text>
+                <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between',width:'100%',marginBottom:10}}>
+                    <TouchableOpacity style={{backgroundColor:'rgba(193,243,254,0.9)',height:40,borderRadius:10,width:'60%'}} onPress={showDatePicker}>
+                        <Text style={{textAlign:'center',fontSize:20,color:'#13728F',padding:6}}>{date.toISOString().slice(0,10)}</Text>
+                    </TouchableOpacity>
+                </View>
+                <Text style={[Styles.label,{width:'100%'}]}>Time</Text>
+                <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between',width:'100%',marginBottom:10}}>
+                    <View style={{backgroundColor:'rgba(193,243,254,0.9)',padding:10,borderRadius:10,width:'50%',marginRight:5}}>
+                        <Text style={Styles.label}>CheckIn</Text>
+                        <TouchableOpacity style={{borderColor:'#13728F',borderWidth:1,backgroundColor:'rgba(193,243,254,0.9)',height:40,borderRadius:10,width:'100%'}} onPress={showTimePicker}>
+                            <Text style={{textAlign:'center',fontSize:15,color:'#13728F',padding:6,width:'100%'}}>{new Date(checkInTime).toLocaleTimeString('en',{ timeStyle: 'short', hour12: false, timeZone: 'UTC',format:'HH:mmrr' })}</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={{backgroundColor:'rgba(193,243,254,0.9)',padding:10,borderRadius:10,width:'50%'}}>
+                        <Text style={Styles.label}>CheckOut</Text>
+                        <TouchableOpacity style={{borderColor:'#13728F',borderWidth:1,backgroundColor:'rgba(193,243,254,0.9)',height:40,borderRadius:10,width:'100%'}} onPress={showTimePicker}>
+                            <Text style={{textAlign:'left',fontSize:15,color:'#13728F',padding:6,width:'100%'}}></Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <Text style={[Styles.label,{width:'100%'}]}>Add vehicle details</Text>
+                <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between',width:'100%',marginBottom:10}}>
+                    <View style={{backgroundColor:'rgba(193,243,254,0.9)',padding:3,borderRadius:10}}>
+                        <Text style={Styles.label}>vehiclePlateNumber</Text>
+                        <TextInput
+                            style={Styles.input}
+                            defaultValue={formData.slotCode}
+                            placeholder="Enter platenumber"
+                            name="slotCode"
+                            onChangeText={(value)=>{
+                                setFormData({
                                 ...formData,
-                                slotSize:sizeValue
-                            })
-                        }
-                    />
+                                slotCode:value
+                                })
+                            }
+                            }
+                        />
+                    </View>
                 </View>
-
-                <View style={Styles.inputGroup}>
-                    <Text style={Styles.label}>Slot sensor</Text>
-                    <TextInput
-                        name='sensor'
-                        defaultValue={formData.sensor}
-                        style={Styles.input}
-                        placeholder="Enter slot sensor"
-                        onChangeText={(sensorValue)=>
-                            setFormData({
-                            ...formData,
-                            sensor:sensorValue
-                            })
-                        }
-                    />
+                <Text style={[Styles.label,{width:'100%'}]}>Total amount</Text>
+                <View style={{display:'flex',flexDirection:'row',justifyContent:'space-between',width:'100%',marginBottom:10}}>
+                    <View style={{borderColor:'#13728F',borderWidth:1,padding:3,borderRadius:10}}>
+                        <Text style={{color:'#13728F',padding:10,width:100,textAlign:'center',fontWeight:'bold',fontSize:20}}>100</Text>
+                    </View>
                 </View>
+                    {datePicker && (
+                    <DateTimePicker
+                        value={date}
+                        mode={'date'}
+                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        is24Hour={true}
+                        onChange={onDateSelected}
+                        style={styles.datePicker}
+                    />
+                    )}
 
-                <View style={Styles.inputGroup}>
-                    <TouchableOpacity style={{backgroundColor:'#13728F',height:40,borderRadius:10}} onPress={()=> handleSubmit()}>
-                        <Text style={{textAlign:'center',fontSize:20,color:'white',padding:6}}>Add slot</Text>
+                    {timePicker && (
+                    <DateTimePicker
+                        value={checkInTime}
+                        mode={'time'}
+                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        is24Hour={false}
+                        onChange={onCheckInTimeSelected}
+                        style={styles.datePicker}
+                    />
+                    )}
+                {/* <DatePicker
+                    style={styles.datePickerStyle}
+                    value={date}
+                    mode="date"
+                    placeholder="select date"
+                    format="DD/MM/YYYY"
+                    minDate={'01-01-2000'}
+                    maxDate="01-01-2000"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                        dateIcon: {
+                        position: 'absolute',
+                        right: -5,
+                        top: 4,
+                        marginLeft: 0,
+                        },
+                        dateInput: {
+                        borderColor : "gray",
+                        alignItems: "flex-start",
+                        borderWidth: 0,
+                        borderBottomWidth: 1,
+                        },
+                        placeholderText: {
+                        fontSize: 17,
+                        color: "gray"
+                        },
+                        dateText: {
+                        fontSize: 17,
+                        }
+                    }}
+                    is24Hour={true}
+                    display="default"
+                    onChange={changeSelectedDate}
+                    /> */}
+
+                <View style={{height:60,width:'90%',position:'relative',bottom:0,padding:10,right:0,left:0}}>
+                    <TouchableOpacity style={[Styles.exploreBtn,{height:40,width:'70%',borderRadius:20}]} title='Explore' onPress={() => navigation.navigate('bookParking', { ID: parkingData?.oneParking._id })}>
+                        <Text style={[Styles.exploreText,{fontSize:18,padding:1}]}>Proceed to Pay</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-           
-            
-            <BottomBar/>
-        </View>
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     centeredView: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
       backgroundColor:'rgba(193,243,254,0.2)',
       padding: 15,
       alignItems: "center",
-      width:'95%'
+      width:'100%',
+      height:'100%'
     },
     modalView: {
     backgroundColor:'rgba(193,243,254,0.2)',
@@ -212,6 +263,11 @@ const styles = StyleSheet.create({
       alignItems: "center",
 
     },
+    calendar: {
+        borderWidth: 1,
+        borderColor: '#eee',
+        borderRadius: 10,
+      },
   });
 
 export default Booking

@@ -5,7 +5,7 @@ import { Button, StyleSheet } from "react-native";
 export const Styles = StyleSheet.create({
     /*-------------------------------Homepage-------------------------------------*/
     container:{
-        minHeight: '100%',
+        height: '100%',
         margin:0,
         padding:0,
         lineHeight:5,
@@ -228,8 +228,8 @@ export const Styles = StyleSheet.create({
         fontWeight:'bold'
     },
     input:{
-        borderWidth:2,
-        padding:2,
+        borderWidth:1,
+        padding:5,
         borderRadius:10,
         borderColor:'#13728F',
         width:'100%'

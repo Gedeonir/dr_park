@@ -229,8 +229,8 @@ const ParkingSlots= ({ navigation, route }) => {
                     </View>
                 </View>
                 <View style={{height:80,with:'90%',position:'absolute',bottom:'10%',padding:10,right:0,left:0}}>
-                    <TouchableOpacity style={[Styles.exploreBtn,{height:50,width:'70%'}]} title='Explore' onPress={() => navigation.navigate('bookParking', { parkingID: parkingData?.oneParking._id })}>
-                        <Text style={[Styles.exploreText,{fontSize:20}]}>BooK parking</Text>
+                    <TouchableOpacity style={[Styles.exploreBtn,{height:50,width:'70%',borderRadius:20}]} title='Explore' onPress={() => navigation.navigate('bookParking', { ID: parkingData?.oneParking._id })}>
+                        <Text style={[Styles.exploreText,{fontSize:20,padding:2}]}>Book parking</Text>
                     </TouchableOpacity>
                 </View>
                 

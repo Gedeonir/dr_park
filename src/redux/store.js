@@ -12,7 +12,6 @@ const rootReducer = combineReducers({
     getAllParkingsReducer,
     getOneParkingReducer,
     getParkingSlotsReducer,
-    createParkingSlotReducer,
     searchParkingReducer 
 }
 );
